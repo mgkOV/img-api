@@ -27,7 +27,8 @@ app.post('/', (req, res) => {
 });
 
 app.get('/latest_searches', (req, res) => {
-  var latestSearches = db.imgs.orderBy('when', 'desc').take(10);
+  var latestSearches = db.imgs.takeRight(5).orderBy('when', 'desc');
+  db.imgs.value();
   res.json(latestSearches);
 });
 
