@@ -6,6 +6,7 @@ const h = require('./helper');
 const db = require('./database');
 const hbs = require('hbs');
 const bodyParser = require('body-parser');
+const _ = require('lodash');
 
 const port = process.env.PORT || 3000;
 
@@ -27,9 +28,9 @@ app.post('/', (req, res) => {
 });
 
 app.get('/latest_searches', (req, res) => {
-  var latestSearches = db.imgs.takeRight(5).orderBy('when', 'desc');
+  var latestSearches = db.imgs.takeRight(5).value();
   db.imgs.value();
-  res.json(latestSearches);
+  res.json(_.orderBy(latestSearches, 'when', 'desc'));
 });
 
 app.get('/:searchQ', (req, res) => {
