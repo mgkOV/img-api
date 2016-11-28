@@ -5,7 +5,12 @@ const h = require('./helper');
 const db = require('./database');
 
 const port = process.env.PORT || 3000
-console.log(db.imgs.__actions__);
+
+app.get('/latest_searches', (req, res) => {
+  var latestSearches = db.imgs.sortBy('date').take(10);
+  res.json(latestSearches);
+});
+
 app.get('/:searchQ', (req, res) => {
   var offset = req.query.offset || 0;
   var searchQ = req.params.searchQ
