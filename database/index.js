@@ -7,8 +7,8 @@ const db = low('db.json', { storage: fileAsync });
 db.defaults({ imgs: [] })
   .value();
 
-const img = db.get('imgs');
+const imgs = db.get('imgs');
 
 module.exports = {
-  img
+  imgs
 };
