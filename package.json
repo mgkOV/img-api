@@ -2,17 +2,20 @@
   "name": "img-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.15.3",
     "express": "^4.14.0",
+    "hbs": "^4.0.1",
     "lowdb": "^0.14.0",
     "query-string": "^4.2.3",
+    "serve-favicon": "^2.3.2",
     "url-parse": "^1.1.7"
   }
 }

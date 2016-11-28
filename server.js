@@ -1,13 +1,25 @@
 const express = require('express');
       app = express();
+const favicon = require('serve-favicon');
 const axios = require('axios');
 const h = require('./helper');
 const db = require('./database');
+const hbs = require('hbs');
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
+
+app.set('view engine', 'hbs');
+hbs.registerPartials(__dirname + '/views/partials');
+
+app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(express.static('public'));
+
+app.get('/', (req, res) => {
+  res.render('index');
+});
 
 app.get('/latest_searches', (req, res) => {
-  var latestSearches = db.imgs.sortBy('date').take(10);
+  var latestSearches = db.imgs.orderBy('when', 'desc').take(10);
   res.json(latestSearches);
 });
 
