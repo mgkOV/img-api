@@ -5,6 +5,7 @@ const axios = require('axios');
 const h = require('./helper');
 const db = require('./database');
 const hbs = require('hbs');
+const bodyParser = require('body-parser');
 
 const port = process.env.PORT || 3000;
 
@@ -13,9 +14,16 @@ hbs.registerPartials(__dirname + '/views/partials');
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
   res.render('index');
+});
+
+app.post('/', (req, res) => {
+  if (!req.body) return res.sendStatus(400);
+  var url = `/${ req.body.search }?offset=${ req.body.offset || 0 }`;
+  res.redirect(url);
 });
 
 app.get('/latest_searches', (req, res) => {
